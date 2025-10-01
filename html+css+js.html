@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Product Landing Page (Tailwind)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to handle specific UI details not easily done with Tailwind defaults */
+        .product-quantity-input::-webkit-outer-spin-button,
+        .product-quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .product-quantity-input {
+            -moz-appearance: textfield;
+        }
+
+        /* Order Review Layout Grid */
+        .order-item-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            align-items: center;
+        }
+
+        /* Custom Active/Selected State for Size/Color Boxes */
+        .size-box,
+        .color-box {
+            /* Design classes copied from your file */
+            @apply cursor-pointer p-1 text-xs border border-gray-300 rounded-sm hover:border-blue-500 transition duration-100;
+        }
+
+        .size-box.selected {
+            /* Design classes copied from your file */
+            @apply border-green-500 text-green-700 bg-green-50 font-semibold;
+        }
+
+        .color-box.selected {
+            /* Design classes copied from your file */
+            @apply ring-2 ring-offset-1 ring-green-500;
+        }
+
+        /* Specific Color styles */
+        .color-red {
+            background-color: #ef4444;
+        }
+
+        /* Tailwind red-500 */
+        .color-white {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+        }
+
+        .color-blue {
+            background-color: #3b82f6;
+        }
+
+        /* Tailwind blue-500 */
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-white shadow-md p-4">
+        <div class="logo text-2xl font-bold text-gray-800">Kashmeeri</div>
+    </header>
+
+    <main class="container mx-auto p-4 lg:p-8">
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+
+            <div class="product-card bg-white border border-gray-200 rounded-lg p-4 text-center shadow-sm relative"
+                data-product-id="1" data-base-price="1150">
+                <label for="product1" class="cursor-pointer block">
+                    <img src="assets/product-img/white-panjabi.png" alt="White Embroidered Panjabi"
+                        class="mx-auto mb-3">
+                    <div class="product-details">
+                        <h4 class="text-lg font-semibold mb-1">Embroidered Cotton Slim Fit Panjabi</h4>
+                        <div class="flex justify-center items-center space-x-2">
+                            <span class="old-price text-sm text-orange-600 line-through">Tk 2,835.00</span>
+                            <span class="new-price text-xl font-bold">Tk 1,150</span>
+                        </div>
+
+                        <div class="options mt-7 flex flex-col space-y-3 text-left">
+                            <div class="flex items-center space-x-2 mb-5">
+                                <label class="font-medium text-sm w-12">Size:</label>
+                                <div class="size-options flex space-x-2" data-selected-size="42">
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="41">41</span>
+                                    <span
+                                        class="size-box selected w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="42">42</span>
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="43">43</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center flex justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <label class="font-medium text-sm w-12">Color:</label>
+                                    <div class="color-options flex space-x-2" data-selected-color="White">
+                                        <span
+                                            class="color-box w-14 h-10 text-center flex items-center justify-center border rounded selected"
+                                            data-color="White">White</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-center align-items-center">
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-l-md border border-gray-300"
+                                        data-action="decrease">-</button>
+                                    <input type="number"
+                                        class="product-quantity-input w-10 text-center border-t border-b border-gray-300 py-1 focus:outline-none"
+                                        value="1" min="1" readonly>
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-r-md border border-gray-300"
+                                        data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <button aria-pressed="false"
+                    class="add-to-cart-btn mt-4 w-full px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    data-product-id="1">Add to Cart</button>
+            </div>
+
+            <div class="product-card bg-white border border-gray-200 rounded-lg p-4 text-center shadow-sm relative"
+                data-product-id="2" data-base-price="1150">
+                <label for="product2" class="cursor-pointer block">
+                    <img src="assets/product-img/deep-red-panjabi.png" alt="Red Embroidered Panjabi"
+                        class="mx-auto mb-3">
+                    <div class="product-details">
+                        <h4 class="text-lg font-semibold mb-1">Embroidered Cotton Slim Fit Panjabi</h4>
+                        <div class="flex justify-center items-center space-x-2">
+                            <span class="old-price text-sm text-orange-600 line-through">Tk 2,835.00</span>
+                            <span class="new-price text-xl font-bold">Tk 1,150</span>
+                        </div>
+
+                        <div class="options mt-7 flex flex-col space-y-3 text-left">
+                            <div class="flex items-center space-x-2 mb-5">
+                                <label class="font-medium text-sm w-12">Size:</label>
+                                <div class="size-options flex space-x-2" data-selected-size="42">
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="41">41</span>
+                                    <span
+                                        class="size-box selected w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="42">42</span>
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="43">43</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center flex justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <label class="font-medium text-sm w-12">Color:</label>
+                                    <div class="color-options flex space-x-2" data-selected-color="Red">
+                                        <span
+                                            class="color-box w-14 h-10 text-center flex items-center justify-center border rounded selected"
+                                            data-color="Red">Red</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center justify-center align-items-center">
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-l-md border border-gray-300"
+                                        data-action="decrease">-</button>
+                                    <input type="number"
+                                        class="product-quantity-input w-10 text-center border-t border-b border-gray-300 py-1 focus:outline-none"
+                                        value="1" min="1" readonly>
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-r-md border border-gray-300"
+                                        data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <button aria-pressed="false"
+                    class="add-to-cart-btn mt-4 w-full px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    data-product-id="2">Add to Cart</button>
+            </div>
+
+            <div class="product-card bg-white border border-gray-200 rounded-lg p-4 text-center shadow-sm relative"
+                data-product-id="3" data-base-price="1150">
+                <label for="product3" class="cursor-pointer block">
+                    <img src="assets/product-img/white-panjabi.png" alt="White Embroidered Panjabi"
+                        class="mx-auto mb-3">
+                    <div class="product-details">
+                        <h4 class="text-lg font-semibold mb-1">Embroidered Cotton Slim Fit Panjabi</h4>
+                        <div class="flex justify-center items-center space-x-2">
+                            <span class="old-price text-sm text-orange-600 line-through">Tk 2,835.00</span>
+                            <span class="new-price text-xl font-bold">Tk 1,150</span>
+                        </div>
+                        <div class="options mt-7 flex flex-col space-y-3 text-left">
+                            <div class="flex items-center space-x-2 mb-5">
+                                <label class="font-medium text-sm w-12">Size:</label>
+                                <div class="size-options flex space-x-2" data-selected-size="42">
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="41">41</span>
+                                    <span
+                                        class="size-box selected w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="42">42</span>
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="43">43</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center flex justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <label class="font-medium text-sm w-12">Color:</label>
+                                    <div class="color-options flex space-x-2" data-selected-color="White">
+                                        <span
+                                            class="color-box w-14 h-10 text-center flex items-center justify-center border rounded selected"
+                                            data-color="White">White</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center align-items-center">
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-l-md border border-gray-300"
+                                        data-action="decrease">-</button>
+                                    <input type="number"
+                                        class="product-quantity-input w-10 text-center border-t border-b border-gray-300 py-1 focus:outline-none"
+                                        value="1" min="1" readonly>
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-r-md border border-gray-300"
+                                        data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <button aria-pressed="false"
+                    class="add-to-cart-btn mt-4 w-full px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    data-product-id="3">Add to Cart</button>
+            </div>
+
+            <div class="product-card bg-white border border-gray-200 rounded-lg p-4 text-center shadow-sm relative"
+                data-product-id="4" data-base-price="1150">
+                <label for="product4" class="cursor-pointer block">
+                    <img src="assets/product-img/deep-red-panjabi.png" alt="Red Embroidered Panjabi"
+                        class="mx-auto mb-3">
+                    <div class="product-details">
+                        <h4 class="text-lg font-semibold mb-1">Embroidered Cotton Slim Fit Panjabi</h4>
+                        <div class="flex justify-center items-center space-x-2">
+                            <span class="old-price text-sm text-orange-600 line-through">Tk 2,835.00</span>
+                            <span class="new-price text-xl font-bold">Tk 1,150</span>
+                        </div>
+                        <div class="options mt-7 flex flex-col space-y-3 text-left">
+                            <div class="flex items-center space-x-2 mb-5">
+                                <label class="font-medium text-sm w-12">Size:</label>
+                                <div class="size-options flex space-x-2" data-selected-size="42">
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="41">41</span>
+                                    <span
+                                        class="size-box selected w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="42">42</span>
+                                    <span
+                                        class="size-box w-10 h-10 border border-gray-400 flex items-center justify-center text-sm hover:border-black rounded"
+                                        data-size="43">43</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center flex justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <label class="font-medium text-sm w-12">Color:</label>
+                                    <div class="color-options flex space-x-2" data-selected-color="Red">
+                                        <span
+                                            class="color-box w-14 h-10 text-center flex items-center justify-center border rounded selected"
+                                            data-color="Red">Red</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-center align-items-center">
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-l-md border border-gray-300"
+                                        data-action="decrease">-</button>
+                                    <input type="number"
+                                        class="product-quantity-input w-10 text-center border-t border-b border-gray-300 py-1 focus:outline-none"
+                                        value="1" min="1" readonly>
+                                    <button
+                                        class="quantity-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-3 py-1 rounded-r-md border border-gray-300"
+                                        data-action="increase">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+                <button aria-pressed="false"
+                    class="add-to-cart-btn mt-4 w-full px-3 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700"
+                    data-product-id="4">Add to Cart</button>
+            </div>
+        </section>
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <div class="space-y-6">
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <div
+                        class="section-title bg-gray-800 text-white font-bold p-3 rounded-t-lg flex justify-between items-center">
+                        <span>1 Product Details</span>
+                    </div>
+                    <div
+                        class="section-title font-bold p-3 flex justify-between items-center collapsible cursor-pointer">
+                        <span>Description</span>
+                        <span class="transform transition-transform duration-300 rotate-0">▼</span>
+                    </div>
+                    <div class="collapsible-content p-4 border-t border-gray-200 hidden">
+                        <p class="font-semibold text-gray-700 mb-2">If You Want A Classic Yet Stylish Look Then This
+                            Panjabi Is A Must Have For You. This Striking Panjabi Will Give A Classic Charm In Your
+                            Look. It Is Crafted With Premium Cotton Fabric That Brings Exceptional Comfort And Signature
+                            Look.</p>
+                        <h5 class="bold"><strong>Features</strong></h5>
+                        <ul>
+                            <li style="font-weight: bold;"><strong>Fabric: 100%<span> Viscose</span></strong></li>
+                            <li>Mandarin Collar</li>
+                            <li>Front button closer&nbsp;</li>
+                            <li>Three button placket</li>
+                            <li>Straight hem</li>
+                            <li>Side slit</li>
+                            <li>Full sleeve</li>
+                            <li>Slim fit<br>
+                            </li>
+                        </ul>
+
+                        <p><strong>Size &amp; Fit-</strong><br>The Model (Height 6'1) Is Wearing Size M
+                            (Medium)<br><br><strong>Rule The Look</strong>-<br><span>This Panjai Can Be Styled With
+                                Pajama And Sandal Or Loafer For Your&nbsp; Best Look. It Will Be The Perfect Choice To
+                                Complete Your Traditional Look.</span><br><br><strong>Special Note</strong>-<br>Product
+                            Color May Slightly Vary, Depending On the Light Source Or Your Device's Screen
+                            Resolution.<br><br><strong>Also, Note That The Sizes Of Our Products May Vary Up To A Slight
+                                Tolerance Of 0.5 To 1 Inch Due To The Unique Design Elements And Styling Choices To Make
+                                Each Piece Stand Out.</strong></p>
+                    </div>
+                    <div
+                        class="section-title font-bold p-3 flex justify-between items-center collapsible cursor-pointer">
+                        <span>Wash Guide</span>
+                        <span class="transform transition-transform duration-300 rotate-0">▼</span>
+                    </div>
+                    <div class="collapsible-content p-4 border-t border-gray-200 hidden">
+                        <div class="tab-popup-content">All of our clothing products comes with a <b>care label</b>
+                            attached on the inside of the product, please <b>wash/use</b> according to the label to
+                            avoid any damages. <br>RISE is not responsible for any damage if you fail to follow the care
+                            label. No exchange of used/washed product will be entertained.
+                            <br>
+                            <br>
+                            <b>N.B.:</b> RISE always puts the best effort to maintain the entire product attributes such
+                            as color, fabric, size and fitting to be the same in what you see on the website and what
+                            you purchase from us. However, any discrepancy is unintentional, and RISE has the authority
+                            to update or add any information at any time without any given notice.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm">
+                    <div class="section-title bg-gray-800 text-white font-bold p-3 rounded-t-lg">
+                        2 Billing Details
+                    </div>
+                    <div class="billing-form p-4 space-y-3">
+                        <div class="flex flex-col sm:flex-row sm:space-x-3 space-y-3 sm:space-y-0">
+                            <input type="text" placeholder="type your name"
+                                class="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                            <input type="tel" placeholder="phone number"
+                                class="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <input type="text" placeholder="type your full address"
+                            class="w-full border border-gray-300 p-2 rounded-md focus:ring-blue-500 focus:border-blue-500 h-16">
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-review-container bg-white rounded-lg shadow-lg h-fit">
+                <div class="section-title bg-gray-800 text-white font-bold p-3 rounded-t-lg">
+                    3 Order Review
+                </div>
+                <div class="order-summary p-4">
+
+                    <div class="flex justify-between font-bold border-b border-gray-300">
+                        <span class="w-3/4">PRODUCT</span>
+                        <span class="w-1/4 text-right">SUBTOTAL</span>
+                    </div>
+
+                    <ul class="product-list space-y-2" id="selected-products"></ul>
+
+                    <div class="flex justify-between pt-3 border-t border-gray-300 font-semibold text-lg">
+                        <span>SUBTOTAL</span>
+                        <span id="subtotal-price" class="text-right">Tk 0.00</span>
+                    </div>
+
+                    <div class="border-t border-gray-300 pt-3 mt-3 space-y-2">
+                        <div class="font-semibold mb-1">Shipping</div>
+                        <label class="flex justify-between items-center text-sm">
+                            <input type="radio" name="shipping" value="70" class="text-blue-600 focus:ring-blue-500"
+                                checked>
+                            Inside Dhaka:
+                            <span>70TK</span>
+                        </label>
+                        <label class="flex justify-between items-center text-sm">
+                            <input type="radio" name="shipping" value="130" class="text-blue-600 focus:ring-blue-500">
+                            Outside Dhaka:
+                            <span>130TK</span>
+                        </label>
+                    </div>
+
+                    <div
+                        class="flex justify-between pt-3 mt-3 border-t border-gray-300 font-extrabold text-xl text-gray-800 bg-gray-100 p-2 rounded">
+                        <span>TOTAL</span>
+                        <span id="total-price" class="text-right">Tk 0.00</span>
+                    </div>
+
+                    <div class="text-center font-bold my-4 p-2 bg-gray-50 border border-gray-200 rounded">
+                        Cash On Delivery
+                    </div>
+
+                    <button
+                        class="place-order-btn w-full p-4 bg-red-600 hover:bg-red-700 text-white font-bold text-xl uppercase rounded transition duration-150">
+                        PLACE ORDER
+                    </button>
+                </div>
+            </div>
+        </section>
+        </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCards = document.querySelectorAll('.product-card');
+            const selectedProductsList = document.getElementById('selected-products');
+            const subtotalPriceSpan = document.getElementById('subtotal-price');
+            const totalPriceSpan = document.getElementById('total-price');
+            const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+            const collapsibleTitles = document.querySelectorAll('.collapsible');
+            const placeOrderButton = document.querySelector('.place-order-btn');
+
+            // --- CORE CHANGE: Global Cart Array for multiple items ---
+            let shoppingCart = [];
+            let cartItemCounter = 0; // To give each added item a unique ID for removal
+
+            // Helper function to extract price amount from text
+            function extractPrice(priceText) {
+                return parseFloat(priceText.replace(/[^0-9.-]+/g, ""));
+            }
+
+            // Function to calculate and update totals
+            function calculateTotal() {
+                let subtotal = 0;
+                // Sum the price property from each item in the shoppingCart array
+                shoppingCart.forEach(item => {
+                    subtotal += item.price;
+                });
+
+                subtotalPriceSpan.textContent = `Tk ${subtotal.toFixed(2)}`;
+
+                const shippingCost = parseFloat(document.querySelector('input[name="shipping"]:checked').value);
+                const total = subtotal + shippingCost;
+
+                // Format total price
+                totalPriceSpan.textContent = `${total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}Tk`;
+            }
+
+            // Function to handle product removal from list (via X button)
+            function removeProduct(event) {
+                if (event.target.closest('.delete-btn')) {
+                    const listItem = event.target.closest('li');
+                    if (!listItem) return;
+
+                    const cartIdToRemove = parseInt(listItem.dataset.cartId);
+
+                    // --- CORE CHANGE: Filter the item out of the global cart array ---
+                    shoppingCart = shoppingCart.filter(item => item.cartId !== cartIdToRemove);
+
+                    listItem.remove();
+                    calculateTotal();
+                }
+            }
+
+            // Function to update the Order Review list
+            function updateOrderSummary() {
+                selectedProductsList.innerHTML = '';
+
+                // --- CORE CHANGE: Iterate over the shoppingCart array ---
+                shoppingCart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    // Attach the unique cart ID to the list item for removal
+                    listItem.dataset.cartId = item.cartId; 
+                    listItem.classList.add('py-2', 'border-gray-100');
+
+                    // HTML structure for the order review item - Must match the original design layout and details
+                    listItem.innerHTML = `
+                        <div class="flex justify-between items-center bg-gray-50 p-3 rounded-md shadow-sm w-full">
+
+                             <div class="flex items-start space-x-3">
+                                <img src="${item.image}"
+                                    alt="Product"
+                                    class="h-24 w-14 border border-gray-200 rounded object-cover">
+
+                                    <div class="flex flex-col space-y-1">
+                                        <span class="font-semibold text-gray-800">${item.name}</span>
+                                        <span class="text-sm text-gray-600">Size: ${item.size}</span>
+                                        <span class="text-sm text-gray-600">Color: ${item.color}</span>
+                                        <span class="text-sm text-gray-600">Quantity: ${item.quantity}</span>
+                                    </div>
+                            </div>
+
+                            <div class="flex flex-col items-end space-y-7 ml-auto w-32 text-right">
+                                <button
+                                    class="delete-btn w-7 h-7 rounded-full bg-black text-white flex items-center justify-center hover:bg-red-600 transition"
+                                    aria-label="Remove item">
+                                    ✕
+                                </button>
+                                <span class="item-price font-semibold text-gray-800 text-lg">
+                                    Tk ${item.price.toFixed(2)}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                    selectedProductsList.appendChild(listItem);
+                });
+
+                calculateTotal();
+            }
+
+            // --- FUNCTION: Collect all data and log to console ---
+            function handlePlaceOrder(e) {
+                e.preventDefault();
+
+                // 1. Collect Billing Details
+                const nameInput = document.querySelector('input[placeholder="type your name"]').value.trim();
+                const phoneInput = document.querySelector('input[placeholder="phone number"]').value.trim();
+                const addressInput = document.querySelector('input[placeholder="type your full address"]').value.trim();
+                
+                // 2. Collect Product Details from the global shoppingCart
+                const orderedProducts = shoppingCart.map(item => ({
+                    image: item.image,
+                    name: item.name,
+                    price: `Tk ${item.price.toFixed(2)}`,
+                    size: item.size,
+                    color: item.color,
+                    quantity: item.quantity
+                }));
+
+                // Simple validation check
+                if (!nameInput || !phoneInput || !addressInput || orderedProducts.length === 0) {
+                     alert("দয়া করে সমস্ত বিলিং তথ্য পূরণ করুন এবং কমপক্ষে একটি পণ্য কার্টে যোগ করুন।");
+                     return;
+                }
+
+                // 3. Collect Shipping and Totals
+                const shippingRadio = document.querySelector('input[name="shipping"]:checked');
+                const shippingCost = parseFloat(shippingRadio.value);
+                const shippingLabel = shippingRadio.closest('label');
+                const shippingType = shippingLabel.childNodes[2].textContent.trim().split(':')[0].trim(); 
+
+                const subtotal = extractPrice(subtotalPriceSpan.textContent);
+                const total = extractPrice(totalPriceSpan.textContent);
+
+                // 4. Construct Final Order Object
+                const finalOrder = {
+                    billingDetails: {
+                        name: nameInput,
+                        phone: phoneInput,
+                        address: addressInput
+                    },
+                    orderedProducts,
+                    shippingInfo: {
+                        type: shippingType,
+                        cost: `${shippingCost}TK`
+                    },
+                    summary: {
+                        subtotal: `Tk ${subtotal.toFixed(2)}`,
+                        total: `${total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}Tk`,
+                        paymentMethod: "Cash On Delivery"
+                    }
+                };
+
+                // 5. Log to Console
+                console.log("--- FINAL ORDER SUBMITTED ---");
+                console.log(finalOrder);
+                console.log("------------------------------");
+
+                alert("অর্ডার ডেটা সংগ্রহ করা হয়েছে এবং কনসোলে লগ করা হয়েছে! সম্পূর্ণ ডেটা দেখতে ব্রাউজারের ডেভেলপার কনসোল (F12) চেক করুন।");
+            }
+
+            // --- Attach Event Listeners ---
+
+            placeOrderButton.addEventListener('click', handlePlaceOrder);
+            selectedProductsList.addEventListener('click', removeProduct);
+
+
+            // --- CORE CHANGE: Add to Cart button logic (Always adds, no toggle) ---
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                // Initialize button state (Removing old 'Remove from Cart' logic)
+                btn.textContent = "Add to Cart";
+                btn.classList.remove("bg-red-600", "hover:bg-red-700");
+                btn.classList.add("bg-green-600", "hover:bg-green-700");
+                btn.removeAttribute("data-in-cart"); // Remove attribute as it's no longer used
+
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const card = e.target.closest('.product-card');
+                    const productId = card.dataset.productId;
+                    const productName = card.querySelector('h4').textContent;
+                    const basePrice = parseFloat(card.dataset.basePrice);
+                    const quantity = parseInt(card.querySelector('.product-quantity-input').value);
+                    const size = card.querySelector('.size-options').dataset.selectedSize;
+                    const color = card.querySelector('.color-options').dataset.selectedColor;
+                    const productImgSrc = card.querySelector('img').src;
+
+                    // Create a unique cart item object
+                    const newItem = {
+                        cartId: ++cartItemCounter, // Assign a unique ID for tracking
+                        productId: productId,
+                        name: productName,
+                        size: size,
+                        color: color,
+                        quantity: quantity,
+                        basePrice: basePrice,
+                        price: basePrice * quantity,
+                        image: productImgSrc
+                    };
+
+                    shoppingCart.push(newItem);
+                    
+                    // Brief visual feedback that the item was added
+                    e.target.textContent = "Added to Cart!";
+                    e.target.classList.remove("bg-green-600", "hover:bg-green-700");
+                    e.target.classList.add("bg-blue-600", "hover:bg-blue-700");
+                    setTimeout(() => {
+                        e.target.textContent = "Add to Cart";
+                        e.target.classList.remove("bg-blue-600", "hover:bg-blue-700");
+                        e.target.classList.add("bg-green-600", "hover:bg-green-700");
+                    }, 500); // Show for 0.5 second
+
+                    updateOrderSummary();
+                });
+            });
+
+            // Size and Color selection logic (Unchanged, ensures options are stored in data-selected attributes)
+            productCards.forEach(card => {
+                // Size Selector Logic
+                card.querySelectorAll('.size-box').forEach(sizeBox => {
+                    sizeBox.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const sizeOptionsContainer = card.querySelector('.size-options');
+                        sizeOptionsContainer.querySelectorAll('.size-box').forEach(box => box.classList.remove('selected', 'ring-2', 'ring-offset-1', 'ring-green-500'));
+                        sizeBox.classList.add('selected', 'ring-2', 'ring-offset-1', 'ring-green-500');
+                        sizeOptionsContainer.dataset.selectedSize = sizeBox.dataset.size;
+                    });
+                });
+
+                // Color Selector Logic
+                card.querySelectorAll('.color-box').forEach(colorBox => {
+                    colorBox.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const colorOptionsContainer = card.querySelector('.color-options');
+                        colorOptionsContainer.querySelectorAll('.color-box').forEach(box => box.classList.remove('selected', 'ring-2', 'ring-offset-1', 'ring-green-500'));
+                        colorBox.classList.add('selected', 'ring-2', 'ring-offset-1', 'ring-green-500');
+                        colorOptionsContainer.dataset.selectedColor = colorBox.dataset.color;
+                    });
+                });
+
+                // Quantity Control Logic
+                card.querySelectorAll('.quantity-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const action = button.dataset.action;
+                        const quantityInput = card.querySelector('.product-quantity-input');
+                        let currentVal = parseInt(quantityInput.value);
+                        if (action === 'increase') {
+                            currentVal++;
+                        } else if (action === 'decrease' && currentVal > 1) {
+                            currentVal--;
+                        }
+                        quantityInput.value = currentVal;
+                        // Note: If you want quantity changes to update existing cart items, you would need
+                        // to add a separate update logic here. Since the item is only added on 'Add to Cart',
+                        // this is sufficient for the current implementation.
+                    });
+                });
+            });
+
+            shippingRadios.forEach(radio => {
+                radio.addEventListener('change', calculateTotal);
+            });
+
+            // Collapsible toggle
+            collapsibleTitles.forEach(title => {
+                title.addEventListener('click', function () {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    const arrow = this.querySelector('span:last-child');
+                    if (arrow) {
+                        arrow.classList.toggle('rotate-180');
+                    }
+                    if (content) {
+                        if (content.classList.contains('hidden')) {
+                            content.classList.remove('hidden');
+                        } else {
+                            content.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+
+            // Initial load calculation
+            calculateTotal();
+        });
+    </script>
+</body>
+
+</html>
